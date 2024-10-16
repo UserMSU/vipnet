@@ -8,7 +8,7 @@ set PASS [lrange $argv 2 2]
 spawn ./ip_vipnet.sh
 sleep 10 
 expect "$LOG@$VIP's password:"
-send -- "$PASS"
+send -- "$PASS\r"
 sleep 5
 send -- "machine halt\r"
 expect eof
