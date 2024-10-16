@@ -5,19 +5,17 @@ set LOG [lrange $argv 0 0]
 set VIP [lrange $argv 1 1]
 set PASS [lrange $argv 2 2]
 
-spawn ./ip_vipnet
+spawn ./ip_vipnet.sh
 sleep 5
 expect "$LOG@$VIP's password:"
 send -- "$PASS\r"
-sleep 2
-send -- "mkdir ok\r"
-expect eof
-
-
-send -- "machine halt"
+sleep 5
+send -- "machine halt\r"
 sleep 60
 spawn ./ip_vipnet.sh
 sleep 5
-expect "$LOG@$VIP's password:\r"
-send -- "machine halt"
+expect "$LOG@$VIP's password:"
+send -- "$PASS\r"
+sleep 5
+send -- "machine halt\r"
 expect eof
