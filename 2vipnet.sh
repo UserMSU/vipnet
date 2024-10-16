@@ -1,5 +1,5 @@
 #!/usr/bin/expect -f
-LOG='user'
+LOG='root'
 VIP='192.168.16.10'
 set timeout 1
 spawn ./ip_vipnet.sh
