@@ -1,10 +1,19 @@
 #!/usr/bin/expect -f
-LOG='root'
-VIP='192.168.16.10'
-set timeout 1
-spawn ./ip_vipnet.sh
+set timeout 2
+
+set LOG [lrange $argv 0 0]
+set VIP [lrange $argv 1 1]
+set PASS [lrange $argv 2 2]
+
+spawn ./ip_vipnet
 sleep 5
-expect "$LOG@$VIP's password:\r"
+expect "$LOG@$VIP's password:"
+send -- "$PASS\r"
+sleep 2
+send -- "mkdir ok\r"
+expect eof
+
+
 send -- "machine halt"
 sleep 60
 spawn ./ip_vipnet.sh
